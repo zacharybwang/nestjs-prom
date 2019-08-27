@@ -1,5 +1,6 @@
 
 import * as client from 'prom-client';
+import { IMetricArguments } from '../interfaces';
 
 export function getMetricToken(type: string, name: string) {
   return `${name}${type}`;
@@ -48,11 +49,7 @@ export const findOrCreateCounter = ({
   name,
   help,
   labelNames,
-}: {
-  name: string;
-  help?: string;
-    labelNames?: string[];
-}): client.Counter => {
+}: IMetricArguments): client.Counter => {
   return findOrCreateMetric({
     name,
     help,
@@ -65,11 +62,7 @@ export const findOrCreateGauge = ({
   name,
   help,
   labelNames,
-}: {
-  name: string;
-  help?: string;
-  labelNames?: string[];
-}): client.Gauge => {
+}: IMetricArguments): client.Gauge => {
   return findOrCreateMetric({
     name,
     help,
@@ -82,11 +75,7 @@ export const findOrCreateHistogram = ({
   name,
   help,
   labelNames,
-}: {
-  name: string;
-  help?: string;
-  labelNames?: string[];
-}): client.Histogram => {
+}: IMetricArguments): client.Histogram => {
   return findOrCreateMetric({
     name,
     help,
@@ -99,11 +88,7 @@ export const findOrCreateSummary = ({
   name,
   help,
   labelNames,
-}: {
-  name: string;
-  help?: string;
-  labelNames?: string[];
-}): client.Summary => {
+}: IMetricArguments): client.Summary => {
   return findOrCreateMetric({
     name,
     help,

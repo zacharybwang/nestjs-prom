@@ -32,3 +32,9 @@ export class MetricTypeSummary implements MetricTypeConfigurationInterface {
   type: MetricType = MetricType.Summary;
   configuration: PromClient.SummaryConfiguration;
 }
+
+export interface IMetricArguments {
+  name: string;
+  help?: string;
+  labelNames?: string[];
+}
