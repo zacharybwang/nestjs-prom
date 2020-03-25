@@ -19,14 +19,18 @@ export const findOrCreateMetric = ({
   type,
   help,
   labelNames,
+  registry,
 }: {
   name: string;
   type: string;
   help?: string;
   labelNames?: string[];
+  registry?: client.Registry;
 }): client.Metric => {
 
-  let metric: client.Metric = client.register.getSingleMetric(name);
+  const register = registry ?? client.register;
+
+  let metric: client.Metric = register.getSingleMetric(name);
   if (!metric) {
     return new client.Counter({
       name: name,
@@ -42,19 +46,21 @@ export const findOrCreateMetric = ({
     });
   }
 
-  return metric;  
+  return metric;
 }
 
 export const findOrCreateCounter = ({
   name,
   help,
   labelNames,
+  registry,
 }: IMetricArguments): client.Counter => {
   return findOrCreateMetric({
     name,
     help,
     type: `Counter`,
     labelNames,
+    registry,
   }) as client.Counter;
 }
 
@@ -62,12 +68,14 @@ export const findOrCreateGauge = ({
   name,
   help,
   labelNames,
+  registry,
 }: IMetricArguments): client.Gauge => {
   return findOrCreateMetric({
     name,
     help,
     type: `Gauge`,
     labelNames,
+    registry,
   }) as client.Gauge;
 }
 
@@ -75,12 +83,14 @@ export const findOrCreateHistogram = ({
   name,
   help,
   labelNames,
+  registry,
 }: IMetricArguments): client.Histogram => {
   return findOrCreateMetric({
     name,
     help,
     type: `Histogram`,
     labelNames,
+    registry,
   }) as client.Histogram;
 }
 
@@ -88,11 +98,13 @@ export const findOrCreateSummary = ({
   name,
   help,
   labelNames,
+  registry,
 }: IMetricArguments): client.Summary => {
   return findOrCreateMetric({
     name,
     help,
     type: `Summary`,
     labelNames,
+    registry,
   }) as client.Summary;
 }

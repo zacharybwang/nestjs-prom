@@ -3,20 +3,16 @@ import {
   DynamicModule,
   Module,
 } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
 import { PromModuleOptions } from './interfaces';
 import { DEFAULT_PROM_REGISTRY, PROM_REGISTRY_NAME, DEFAULT_PROM_OPTIONS } from './prom.constants';
 
 import * as client from 'prom-client';
 import { Registry, collectDefaultMetrics, DefaultMetricsCollectorConfiguration } from 'prom-client';
-import { getRegistryName, getOptionsName } from './common/prom.utils';
+import { getRegistryName } from './common/prom.utils';
 
 @Global()
 @Module({})
 export class PromCoreModule {
-  constructor(
-    private readonly moduleRef: ModuleRef,
-  ) {}
 
   static forRoot(
     options: PromModuleOptions = {},
