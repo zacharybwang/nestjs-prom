@@ -22,6 +22,14 @@ import { InboundMiddleware } from '../../lib/middleware/inbound.middleware';
       //     help: 'index_counter a simple counter',
       //   },
       // },
+      {
+        type: MetricType.Histogram,
+        configuration: {
+          name: 'my_histogram',
+          help: 'my_histogram a simple histogram',
+          // labelNames: ['method'], // Uncomment labelNames to make the histogram metric disappear          
+        }
+      },
     ]),
   ],
   controllers: [AppController],
