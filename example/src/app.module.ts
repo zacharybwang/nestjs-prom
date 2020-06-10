@@ -10,6 +10,8 @@ import { InboundMiddleware } from '../../lib/middleware/inbound.middleware';
       defaultLabels: {
         app: 'v1.0.0',
       },
+      withDefaultsMetrics: true,
+      withDefaultController: true,
       useHttpCounterMiddleware: true,
     }),
     PromModule.forMetrics([
@@ -20,6 +22,27 @@ import { InboundMiddleware } from '../../lib/middleware/inbound.middleware';
           help: 'index_counter a simple counter',
         },
       },
+      {
+        type: MetricType.Gauge,
+        configuration: {
+          name: 'my_gauge',
+          help: 'my_gauge a simple gauge',
+        }
+      },
+      {
+        type: MetricType.Histogram,
+        configuration: {
+          name: 'my_histogram',
+          help: 'my_histogram a simple histogram',
+        }
+      },
+      {
+        type: MetricType.Summary,
+        configuration: {
+          name: 'my_summary',
+          help: 'my_summary a simple summary',
+        }
+      }
     ]),
   ],
   controllers: [AppController],
