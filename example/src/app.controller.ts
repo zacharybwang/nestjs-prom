@@ -26,6 +26,7 @@ export class AppController {
     @InjectCounterMetric('index_counter') private readonly _counterMetric: CounterMetric,
     @InjectGaugeMetric('my_gauge') private readonly _gaugeMetric: GaugeMetric,
     @InjectHistogramMetric('my_histogram') private readonly _histogramMetric: HistogramMetric,
+    @InjectHistogramMetric('zack_histogram') private readonly _zackHistogramMetric: HistogramMetric,
     @InjectSummaryMetric('my_summary') private readonly _summaryMetric: SummaryMetric,
     private readonly promService: PromService,
   ) {}
@@ -64,13 +65,15 @@ export class AppController {
     // @Request() req,
     // @Response() res,
   ): string {
-    const start = Date.now();
-    const duration = Date.now() - start; // durations in milliseconds
+    // const start = Date.now();
+    // const duration = Date.now() - start; // durations in milliseconds
 
-    this._counterMetric.inc(1, new Date());
-    this._gaugeMetric.inc();
-    this._histogramMetric.observe(duration);
-    this._summaryMetric.observe(duration);
+    // this._counterMetric.inc(1, new Date());
+    // this._gaugeMetric.inc();
+    // this._histogramMetric.observe(duration);
+    // this._histogramMetric.labels('GGEETT');
+    // this._zackHistogramMetric.labels('GET', '200', 'ws/wsId');
+    // this._summaryMetric.observe(duration);
     new MyObj();
 
     return workspaceId;

@@ -44,8 +44,14 @@ export class PromModule {
         labelNames: ['method', 'status', 'path']
       });
 
-      moduleForRoot.providers = [...moduleForRoot.providers , inboundProvider];
-      moduleForRoot.exports = [...moduleForRoot.exports, inboundProvider];
+      const inboundProviderZ = createPromHistogramProvider({
+        name: 'zack_histogram',
+        help: 'zack_histogram Number of inbound request',
+        labelNames: ['method', 'status', 'path']
+      });
+
+      moduleForRoot.providers = [...moduleForRoot.providers , inboundProvider, inboundProviderZ];
+      moduleForRoot.exports = [...moduleForRoot.exports, inboundProvider, inboundProviderZ];
     }
 
     return moduleForRoot;
@@ -61,8 +67,12 @@ export class PromModule {
           return createPromCounterProvider(entry.configuration);
         case MetricType.Gauge:
           return createPromGaugeProvider(entry.configuration);
-        case MetricType.Histogram:
+        case MetricType.Histogram: {
+          console.log('zack entry.configuration in prom module');
+          console.log(entry.configuration);
+
           return createPromHistogramProvider(entry.configuration);
+        }
         case MetricType.Summary:
           return createPromSummaryProvider(entry.configuration);
         default:
@@ -103,6 +113,10 @@ export class PromModule {
     configuration: client.HistogramConfiguration
   ): DynamicModule {
     const provider = createPromHistogramProvider(configuration);
+
+    console.log('zack configuration in prom module');
+    console.log(configuration);
+
     return {
       module: PromModule,
       providers: [provider],

@@ -34,6 +34,14 @@ import { InboundMiddleware } from '../../lib/middleware/inbound.middleware';
         configuration: {
           name: 'my_histogram',
           help: 'my_histogram a simple histogram',
+          labelNames: ['method'],
+        }
+      },
+      {
+        type: MetricType.Histogram,
+        configuration: {
+          name: 'zack2_histogram',
+          help: 'zack2_histogram a simple histogram',
         }
       },
       {
